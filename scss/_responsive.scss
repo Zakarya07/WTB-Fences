@@ -1,0 +1,49 @@
+// Breakpoint variables
+$laptop: 1024px;
+$ipad: 820px;
+$tablet: 768px;
+$phone: 425px;
+$medium-phone: 375px;
+$small-phone:320px;
+
+// Mixin for the small laptop (not laptop L)
+@mixin laptop{
+    @media (max-width: #{$laptop}) {
+        @content;
+    }
+}
+
+// Mixin for tablets like iPad Air or else
+@mixin ipad{
+    @media (max-width: #{$ipad}) {
+        @content;
+    }
+}
+
+// Mixin for regular tablets
+@mixin tablet{
+    @media (max-width: #{$tablet}) {
+        @content;
+    }
+}
+
+// Mixin for big phone
+@mixin phone{
+    @media (max-width: #{$phone}) {
+        @content;
+    }
+}
+
+// Mixin for medium phone
+@mixin medium-phone{
+    @media (max-width: #{$medium-phone}) {
+        @content;
+    }
+}
+
+// Mixin for small phone
+@mixin small-phone{
+    @media (max-width: #{$small-phone}) {
+        @content;
+    }
+}

@@ -1,0 +1,19 @@
+$green_color: #4F978E;
+
+
+// Mixin for the flexbox 
+@mixin d-flex($direction: row /* defaul value: 'row' */, $x_axe: center /* defaul value: 'center' */, $y_axe: center /* defaul value: 'row' */){
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $x_axe;
+    align-items: $y_axe;
+}
+
+// Mixin for the title
+
+@mixin title($f-size:2em, $font-weight:normal, $color:black){
+    font-size: $f-size;
+    font-weight: $font-weight;
+    color: $color;
+}
+

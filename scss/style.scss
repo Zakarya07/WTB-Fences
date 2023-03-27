@@ -1,0 +1,971 @@
+@use '_config';
+@use '_utilities';
+@use '_font';
+@use 'responsive';
+
+// Reset some default style
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Metropolis";
+}
+
+// For scrolling gently when we're going from a part of a page to an other
+html{
+    scroll-behavior: smooth;
+}
+
+// Navbar
+nav{
+    z-index: 50000;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgb(253, 253, 253);
+    height: 8vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    & .nav-main-container{
+        height: 100%;
+        @include config.d-flex(row,space-around,center);
+
+        &>*{
+            height: 100%;
+        }
+        // Logo container
+        .logo-container{
+            flex-grow: 1;
+            @include config.d-flex(row, center, center);
+
+            // Brand name 
+            a{
+                text-decoration: none;
+                h1{
+                    @include config.title(2em,600, config.$green-color);
+                    transition: all .25s linear;
+                    // Responsive Laptop
+                    @include responsive.laptop{
+                        @include config.title(1.5em,600, config.$green-color);
+                    }
+                    @include responsive.tablet{
+                        @include config.title(2em,600, config.$green-color);
+                    }
+                    @include responsive.medium-phone{
+                        display: none;
+                    }
+                }
+                &:hover h1{
+                    transform: scale(1.01);
+                    color:black;
+                }
+            }
+        }
+        // Links of the navbar container
+        .links-container{
+            flex-grow: 2;
+            // List
+            ul{
+                height: 100%;
+                @include config.d-flex(row, space-evenly, center);
+                li{
+                    list-style: none;
+                    a{
+                        padding: .25em;
+                        text-decoration: none;
+                        text-transform: uppercase;
+                        @include config.title(1em,300, black);
+                        border-bottom: 1px solid transparent;
+                        transition: all .2s linear;
+
+                        // Responsive
+                        @include responsive.laptop{
+                            @include config.title(.9em,300, black);
+                        }
+                        @include responsive.ipad{
+                            @include config.title(1em,300, black);
+                            padding: .25em 0;
+                        }
+                        @include responsive.tablet{
+                            @include config.title(1.2em,300, black);
+                            padding: .5vh 0;
+                        }
+                        @include responsive.small-phone{
+                            @include config.title(1em,300, black);
+                        }
+                    }
+                    &:hover > a{
+                        border-bottom: 1px solid config.$green-color;
+                        // Responsive
+                        @include responsive.tablet{
+                            border: none;
+                        }
+                    }
+
+                    // Responsive
+                    @include responsive.ipad{
+                        margin: 1vh 2vw;
+                    }
+                    @include responsive.tablet{
+                        margin: 1vh 3vw;
+                    }
+                    @include responsive.phone{
+                        margin: 1vh 1.25vw;
+                        border-bottom: 1px solid config.$green-color;
+                    }
+                    @include responsive.small-phone{
+                        margin: .5vh 1vw;
+                    }
+                }
+
+                // Responsive
+                @include responsive.ipad{
+                    @include config.d-flex(row, center, end);
+                    flex-wrap: wrap;
+                }
+                @include responsive.tablet{
+                    @include config.d-flex(row, center, center);
+                    flex-wrap: wrap;
+                }
+                @include responsive.small-phone{
+                    @include config.d-flex(column);
+                }
+
+            }
+
+            // Responsive 
+            @include responsive.ipad{
+                flex-grow: 5;
+            }
+        }
+        // Language choice container
+        .language-container{
+            flex-grow: 1;
+            height: 100%;
+            @include config.d-flex();
+            // Links to the language
+            a{
+                text-decoration: none;
+                transition: all .2s linear;
+                &:hover{
+                    transform: scale(1.1);
+                }
+                h2{
+                    @include config.title(1.33em, 500, config.$green_color);
+                    // Responsive Laptop
+                    @include responsive.laptop{
+                        @include config.title(1.1em, 500, config.$green_color);
+                    }
+                }
+            }
+            // Slash separator for the language
+            .language-separator{
+                padding:0 .25vw;
+                height: 100%;
+                @include config.d-flex();
+                font-size: 1.5em;
+            }
+        }
+
+        // Responsive
+        @include responsive.tablet{
+            @include config.d-flex(column, center, center);
+        }
+        
+    }
+    // Responsive
+
+    @include responsive.ipad{
+        height: 10vh;
+        border-bottom: 1px solid rgb(234, 234, 234);
+    }
+
+    @include responsive.tablet{
+        height: 20vh;
+        border-bottom: 1px solid rgb(234, 234, 234);
+    }
+    @include responsive.phone{
+        height: 22.5vh;
+    }
+}
+
+// Header
+header{
+    // Container for the site title ("Clôtures")
+    margin-top: 10vh !important;
+    .title-container{
+        background-color:#F5F4F4;
+        height: 20vh;
+        @include config.d-flex();
+        // Title 
+        h1{
+            @include config.title(3.75em, 500, black);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        // Responsive
+        @include responsive.laptop{
+            height: 15vh;
+        }
+        @include responsive.ipad{
+            height: 12.5vh;
+        }
+        @include responsive.tablet{
+            display: none;
+        }
+    }
+    // Container of the hero section (images)
+    .hero-section{
+        position: relative;
+        height: 65vh;
+        @include config.d-flex(column, center, center);
+        // CTA Title
+        h1{
+            z-index: 1;
+            @include config.title(2.75em, 100, white);
+            width: 65%;
+            background-image:linear-gradient(150deg,rgba(253, 19, 105, 0.9), rgba(5, 198, 176, 0.75));
+            text-align: center;
+            position:absolute;
+            
+            // Responsive
+            @include responsive.tablet{
+                @include config.title(2em, 100, white);
+            }
+
+            @include responsive.tablet{
+                @include config.title(1.5em, 100, white);
+                width: 90%;
+            }
+        }
+        // Global container of the hero section
+        .images-hero-section-container{
+            @include config.d-flex(row, space-around,center);
+            height: 100%;
+            width: 100%;
+
+            // Same style for the three container image
+            :is(.left, .middle, .right){
+                width: 33.33%;
+                height: 70%;
+                overflow: hidden;
+                &:hover img{
+                    transform: scale(1.1);
+                }
+                // Responsive
+                @include responsive.phone{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            // Images
+            :is(.left, .middle, .right) img{
+                width: 100%;
+                height: 100%;
+                object-fit:cover;
+                transition: all .5s linear;
+            }
+            // Left image container
+            .left{
+                @include responsive.phone{
+                    display: none;
+                }
+            }
+            // Middle image container
+            .middle{
+                align-self: end;
+                @include responsive.phone{
+                    width: 100%;
+                }
+            }
+            // Right image container
+            .right{
+                @include responsive.phone{
+                    display: none;
+                }
+            }
+        }
+
+        // Responsive
+        @include responsive.tablet{
+            height: 60vh;
+            margin-top: 20vh;
+        }
+        @include responsive.phone{
+            margin-top: 0vh;
+            height: 100%;
+        }
+    }
+    // Responsive
+    @include responsive.ipad{
+        margin-top: 15vh !important;
+    }
+    @include responsive.phone{
+        margin-top: 25vh !important;
+        height: 70vh !important;
+    }
+}
+
+// Section product description
+section#product-description{
+    height: 80vh;
+    @include config.d-flex(column,space-evenly, center);
+    // Section's title
+    h1{
+        @include config.title(2.5em, 500);
+        text-align: center;
+
+        // Responsive
+        @include responsive.phone{
+            @include config.title(2em, 500);
+        }
+    }
+    // hr (hozizontal bar)
+    hr.hr{
+        width: 60vw;
+        border: none;
+        height: 1px;
+        background-color: lightgrey;
+    }
+    // Description text
+    p{
+        @include config.title(1.5em, 200);
+        line-height: 5vh;
+        text-align: center;
+
+        a{
+            text-decoration: none;
+            &:visited{
+                color:unset;
+            }
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+        // Responsive
+        @include responsive.laptop{
+            @include config.title(1.2em, 200);
+        }
+        @include responsive.phone{
+            @include config.title(1em, 200);
+        }
+    }
+
+    // Responsive
+    @include responsive.phone{
+        height: auto;
+    }
+}
+
+// Section price and sizes
+section#price-and-sizes{
+    min-height: 90vh;
+    @include config.d-flex(column, space-evenly, center);
+    // Section's title
+    h1{
+        @include config.title(2.5em,500,);
+        text-align: center;
+
+        // Responsive
+        @include responsive.phone{
+            @include config.title(2em, 500);
+        }
+    }
+    // hr (hozizontal bar)
+    hr.hr{
+        width: 60vw;
+        border: none;
+        height: 1px;
+        background-color: lightgrey;
+    }
+    // Main container for the three types of fences
+    .fences-types-container{
+        @include config.d-flex(row, space-around, center);
+        // Fences 
+        .fences{
+            height: 25vh;
+            width: 32%;
+            @include config.d-flex(column,center,center);
+            // Fence title
+            h3{
+                @include config.title(2.5em, 100);
+                width: 100%;
+                height: auto;
+
+                // Responsive
+                @include responsive.laptop{
+                    @include config.title(2em, 200);
+                }
+                @include responsive.ipad{
+                    @include config.title(1.75em, 200);
+                    text-align: center;
+                }
+                @include responsive.tablet{
+                    @include config.title(2em, 200);
+                    text-align: center;
+                }
+            }
+            // List of sizes
+            ul:not(.sub-list){
+                width: 100%;
+                height: 50%;
+                flex-grow: 1;
+                @include config.title(1.25em,100);
+                @include config.d-flex(column, center, start);
+                // First point of the list
+                li:not(ul.sub-list>li){
+                    transform: translateX(10%);
+                    @include config.title(1.1em,300);
+
+                     // Responsive
+                    @include responsive.laptop{
+                        @include config.title(1em, 200);
+                        transform: translateX(0);
+                    }
+                    @include responsive.tablet{
+                        @include config.title(.9em, 200);
+                        width: 50%;
+                    }
+                    @include responsive.phone{
+                        @include config.title(.9em, 200);
+                        width: 90%;
+                    }
+                }
+                // Sub list
+                ul.sub-list{
+                    width: 70%;
+                    @include config.d-flex(column,center,start);
+
+                    // Responsive
+                    @include responsive.laptop{
+                        width: 90%;
+                    }
+
+                    // List point of the sub-list
+                    li{
+                        list-style-type: circle;
+                        text-indent: -40px;
+
+                        // Responsive
+                        @include responsive.laptop{
+                            text-indent:0px;
+                            @include config.title(.9em, 200);
+                        }
+                    }
+                    // Responsive
+                    @include responsive.tablet{
+                        @include config.d-flex(column, center, start);
+                        width: 50%;
+                    }
+                    @include responsive.phone{
+                        width: 80%;
+                    }
+                }
+                // Responsive
+                @include responsive.tablet{
+                    @include config.d-flex(column,center);
+                }
+                // Responsive
+                @include responsive.tablet{
+                    @include config.d-flex(column,space-evenly);
+                }
+            }
+            // Responsive 
+            @include responsive.tablet{
+                width: 100%;
+            }
+        }
+        // Responsive
+        @include responsive.tablet{
+        @include config.d-flex(column);
+        }
+    }
+    // Promotion fences
+    h2{
+        @include config.title(2.75em, 100, lighten(config.$green_color,20%));
+        font-style: italic;
+        text-align: center;
+
+        // Responsive
+        @include responsive.laptop{
+            @include config.title(2.25em, 100, lighten(config.$green-color, 20%));
+        }
+        @include responsive.phone{
+            @include config.title(1.75em, 100, lighten(config.$green-color, 20%));
+        }
+    }
+
+}
+
+// Section Colors
+section#colors{
+    // Section's title
+    min-height: 95vh;
+    h1{
+        @include config.title(2.75em,400, config.$green_color);
+        
+        // Responsive
+        @include responsive.phone{
+            @include config.title(2.5em,400, config.$green_color);
+        }
+    }
+    // Main container of the colors choice
+    .main-container-colors{
+        @include config.d-flex(row,space-between,center);
+        width: 100%;
+        height: 60vh;
+        // Grey container of the grey fences image
+        .grey-container{
+            width: 48%;
+            height: 100%;
+            @include config.d-flex(row,center,center);
+            // Image container
+            .img-container{
+                height: 90%;
+                width: 50%;
+                // Image
+                img{
+                    object-fit: cover;
+                    box-shadow: -10px 5px 1px rgb(165, 172, 180);
+                    height: 100%;
+                    width: 95%;
+                    filter: contrast(75%) brightness(1.25) saturate(1.2) ;
+                    transition: all .3s ease;
+
+                    &:hover{
+                        transform: scale(1.05);
+                    }
+
+                    // Responsive
+                    @include responsive.tablet{
+                        box-shadow: none;
+                        width: 100%;
+                    }
+                    @include responsive.phone{
+                        box-shadow: none;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                // Responsive
+                @include responsive.tablet{
+                    width: 100%;
+                }
+                @include responsive.phone{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            // Responsive
+            @include responsive.tablet{
+                width: 100%;
+                @include config.d-flex(column);
+                margin-bottom: 5vh;
+            }
+            @include responsive.phone{
+                border: 6px solid lightgrey;
+                margin-bottom: 5vh;
+            }
+        }
+        // Green container of the green fences image
+        .green-container{
+            @include config.d-flex(row,center,center);
+            height: 100%;
+            width: 48%;
+            // Image container
+            .img-container{
+                height: 90%;
+                width: 100%;
+                // Image
+                img{
+                    object-fit: cover;
+                    object-position: center 20%;
+                    box-shadow: 10px 5px 1px darken(config.$green_color, 10%);
+                    width: 95%;
+                    height: 100%;
+                    transition: all .3s ease;
+                    filter:contrast(1.1) brightness(1.15) saturate(1.1);
+
+                    &:hover{
+                        transform: scale(1.05);
+                    }
+
+                    // Responsive
+                    @include responsive.tablet{
+                        box-shadow: none;
+                        width: 100%;
+                    }
+                    @include responsive.phone{
+                        box-shadow: none;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                // Responsive 
+                @include responsive.tablet{
+                    width: 100%;
+                }
+                // Responsive 
+                @include responsive.phone{
+                    width: 100%;
+                }
+            }
+
+            // Responsive
+            @include responsive.tablet{
+                width: 100%;
+                @include config.d-flex(column);
+            }
+
+            @include responsive.phone{
+                border: 4px solid green;
+            }
+        }
+        // Responsive
+        @include responsive.tablet{
+            @include config.d-flex(column,space-between,center);
+            height: 100%;
+        }
+
+    }
+
+}
+
+// Section How it works 
+section#how-it-works{
+    height: auto;
+    // Section's title
+    h1{
+        @include config.title(2.75em, 400, config.$green_color);
+        // Responsive
+        @include responsive.phone{
+            @include config.title(2.5em, 400, config.$green_color);
+        }
+    }
+    // Main video container (Explanation) for the title and video
+    .explanation-video-container{
+        @include config.d-flex(column, center, start);
+        ul{
+            li{
+                // Title
+                h2{
+                    @include config.title(2.25em, 100);
+                    font-style: italic;
+                }
+            }
+        }
+        // Video container
+        .video-container{
+            width: 33vw;
+            height: 33vh;
+            box-shadow: 2px 3px 10px black;
+            // Video source
+            video{
+                height: 100%;
+                width: 100%;
+            }
+
+            // Responsive 
+            @include responsive.tablet{
+                width: 100%;
+                height: 70vh;
+            }
+            @include responsive.phone{
+                width: 100%;
+                height: 60vh;
+            }
+        }
+    }
+    // Main video container (Assembly) for the title and video
+    .assembly-video-container{
+        @include config.d-flex(column, center, start);
+        ul{
+            li{
+                // Title
+                h2{
+                    @include config.title(2.25em, 100);
+                    font-style: italic;
+                }
+            }
+        }
+        // Video container
+        .video-container{
+            width: 33vw;
+            height: 33vh;
+            box-shadow: 2px 3px 10px black;
+            // Video source
+            video{
+                height: 100%;
+                width: 100%;
+            }
+            // Responsive 
+            @include responsive.tablet{
+                width: 100%;
+                height: 70vh;
+            }
+            @include responsive.phone{
+                width: 100%;
+                height: 60vh;
+            }
+        }
+        // Responsive
+        @include responsive.tablet{
+            margin-top: 5vh;
+            margin-bottom: 5vh;
+        }
+    }
+}
+
+// Section Footer
+section#footer{
+    background: linear-gradient(90deg,rgb(48 193 163 / 95%) 10%, rgba(255, 255, 255, 0)),url("../Ressources/Website_Images/footer-bg.jpg");
+    background-size: 120%;
+    background-position-x: right;
+    height: 70vh;
+    // Footer container
+    .footer-container{
+        @include config.d-flex(column, space-between, center);
+        height: 100%;
+        // Footer
+        footer{
+            @include config.d-flex(row,flex-start,center);
+            background-color:rgba(255, 255, 255, .95);
+            width: 65%;
+            flex-grow: 1;
+            align-self: flex-end;
+            // Information container (text content)
+            .informations-container{
+                @include config.d-flex(column,space-evenly,start);
+                height: 100%;
+                width: 50%;
+                // Brand name container
+                .brand-name-container{
+                    // Brand name
+                    h3.brand-name{
+                        @include config.title(1.5em, 600);
+                    }
+                }
+                // Address container
+                .address-container{
+                    // Brand name
+                    p.address{
+                        @include config.title(1.25em, 400);
+                        text-transform: uppercase;
+
+                        // Responsive
+                        @include responsive.tablet{
+                            @include config.title(1em, 400);
+                        }
+                        @include responsive.phone{
+                            @include config.title(.8em, 400);
+                        }
+                    }
+                }
+                // Phone container
+                .phone-container{
+                    width: 100%;
+                    // Phone & fax
+                    p{
+                        @include config.title(1em, 200);
+                    }
+                    ul{
+                        width: 100%;
+                        @include config.d-flex(column, space-evenly,center);
+                        li{
+                            width: 85%;
+                            @include config.title(.9em, 200);
+                            // Responsive
+                            @include responsive.tablet{
+                                @include config.title(.85em, 400);
+                            }
+                        }
+                    }
+                }
+                // Mail container
+                .mail-container{
+                    // Email
+                    p{
+                        @include config.title(1em, 200);
+
+                        // Responsive
+                        @include responsive.phone{
+                            @include config.title(.9em, 200);
+                        }
+                    }
+                }
+                
+                // Responsive
+                @include responsive.ipad{
+                    width: 60%;
+                }
+                @include responsive.phone{
+                    width: 70%;
+                }
+                @include responsive.small-phone{
+                    width: 100%;
+                }
+            }
+            // Language Choice container
+            .language-choice-container{
+                @include config.d-flex(row,start,center);
+                height: 100%;
+                width: 60%;
+                // France
+                .france-container{
+                    height: 100%;
+                    width:20%;
+                    @include config.d-flex(row,start,center);
+                    span{ 
+                        a{
+                            img{/* France flag image*/
+                                height: 3vh;
+                            }
+                        }
+                        // Responsive 
+                        @include responsive.phone{
+                            align-self: end
+                        }
+                    }
+                    // Responsive
+                    @include responsive.tablet{
+                        @include config.d-flex(row,center,center);
+                        width: 40%;
+                    }
+
+                }
+                // England
+                .england-container{
+                    height: 100%;
+                    width: 20%;
+                    @include config.d-flex(row,start,center);
+                    span{ 
+                        a{
+                            img{/* England flag image*/
+                                height: 3vh;
+                            }
+                        }
+                    }
+                    // Responsive
+                    @include responsive.tablet{
+                        width: 40%;
+                        @include config.d-flex(row,center,center);
+                    }
+                }
+
+                // Responsive
+                @include responsive.ipad{
+                    @include config.d-flex(row, space-evenly, center);
+                }
+                @include responsive.tablet{
+                    width: 40%;
+                }
+                @include responsive.phone{
+                    width: 30%;
+                    @include config.d-flex(column, center,center);
+                }
+                @include responsive.small-phone{
+                    display: none;
+                }
+            }
+
+            // Responsive
+            @include responsive.phone{
+                width: 90%;
+                @include config.d-flex(row, space-between);
+            }
+            @include responsive.small-phone{
+                width: 100%;
+            }
+
+        }
+        // Copyright container
+        .copy{
+            background-color: #fff;
+            width: 100%;
+            h2{
+                text-align: center;
+                @include config.title(1.1em, 700, black);
+                font-style: italic;
+                span{
+                    @include config.title(.9em, 300, black);
+                    font-style: normal;
+                }
+            }
+        }
+    }
+
+    // Responsive
+    @include responsive.ipad{
+        background-size: cover;
+        height: 60vh;
+    }
+    @include responsive.phone{
+        background-size: cover;
+        height: 50vh;
+    }
+}
+
+// Button top 
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 10vh;
+    right:5vw;
+    width: 65px;
+    height: 65px;
+    z-index: 99;
+    color:black;
+    background-color:transparent;
+    cursor: pointer;
+    font-weight: thin;
+    border: 1px solid black;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    transition: background-color .25s, color 0.25s .2s, transform .25s, border .1s, font-size .5s;
+    transition-timing-function: ease-out;
+
+    i {
+        font-size: 2em;
+         // Responsive
+        @include responsive.ipad{
+            font-size: 1.5em;
+        }
+        @include responsive.tablet{
+            font-size: 1.25em;
+        }
+        @include responsive.phone{
+            font-size: 0em;
+        }
+    }
+
+    &:hover {
+        transform: scale(1.15);
+        background-color: rgb(0, 0, 0);
+        color: whitesmoke;
+    }
+
+    // Responsive
+    @include responsive.ipad{
+        width: 50px;
+        height: 50px;
+        bottom: 5vh;
+        right: 2vh;
+    }
+
+    @include responsive.tablet{
+        width: 40px;
+        height: 40px;
+    }
+
+    @include responsive.phone{
+        width: 0px;
+        visibility: hidden;
+        pointer-events: none;
+        height: 0px;
+    }
+}

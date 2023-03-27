@@ -1,0 +1,79 @@
+// Set all values in an list [like an array]
+$spaceamounts : (1,2,3,4,5);
+
+// Looping like in an array
+@each $space in $spaceamounts {
+    // ______ Margin
+    // both axis 
+    .m-#{$space}{
+        margin: #{$space}vh #{$space}vw !important;
+    } 
+    // vertical axe
+    .my-#{$space}{
+        margin-top: #{$space}vh!important;
+        margin-bottom: #{$space}vh !important;
+    } 
+    // horizontal axe
+    .mx-#{$space}{
+        margin-left: #{$space}vw  !important;
+        margin-right:  #{$space}vw  !important;
+    } 
+    // bottom
+    .mb-#{$space}{
+        margin-bottom: #{$space}vh !important;
+    }
+    // top
+    .mt-#{$space}{
+        margin-top: #{$space}vh !important;
+    }
+    // right
+    .mr-#{$space}{
+        margin-right: #{$space}vw !important;
+    }
+    // left
+    .ml-#{$space}{
+        margin-left: #{$space}vw !important;
+    }
+    
+    // ____________ Padding
+    // both axis 
+   .p-#{$space}{
+       padding: #{$space}vh #{$space}vw !important;
+   } 
+    // vertical axe
+   .py-#{$space}{
+       padding-top: #{$space}vh !important;
+       padding-bottom: #{$space}vh !important;
+   } 
+    // horizontal axe
+   .px-#{$space}{
+       padding-left:   #{$space}vw !important;
+       padding-right:   #{$space}vw !important;
+   } 
+    // bottom
+    .pb-#{$space}{
+        padding-bottom: #{$space}vh !important;
+    }
+    // top
+    .pt-#{$space}{
+        padding-top: #{$space}vh !important;
+    }
+    // right
+    .pr-#{$space}{
+        padding-right: #{$space}vw !important;
+    }
+    // left
+    .pl-#{$space}{
+        padding-left: #{$space}vw !important;
+    }
+}
+// For the content to stay at the center of the page
+.container{
+    width: 80vw;
+    margin: 0 auto;
+}
+// Class active for links 
+.active{
+    text-decoration: underline !important;
+    text-decoration-color: black !important;
+}
